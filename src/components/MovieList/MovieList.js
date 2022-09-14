@@ -9,7 +9,7 @@ function MovieList({ items }) {
     <List>
       {items.map(({ id, title, poster_path }) => {
         return (
-          <Item key={id} to={`movies/${id}`} state={{ from: location }}>
+          <Item key={id} to={`/movies/${id}`} state={{ from: location }}>
             <Poster
               src={`https://image.tmdb.org/t/p/w300${poster_path}`}
               alt={title}

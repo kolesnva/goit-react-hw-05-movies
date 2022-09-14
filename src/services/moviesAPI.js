@@ -8,7 +8,7 @@ export async function getTrendingMovies() {
     const { data } = await axios.get(`trending/movie/day?api_key=${API_KEY}`);
     return data;
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 }
 
@@ -22,6 +22,15 @@ export async function getMoviesByName(searchQuery) {
     const { data } = await axios.get(`search/movie?${searchParams}`);
     return data;
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
+  }
+}
+
+export async function getMovieById(movieId) {
+  try {
+    const { data } = await axios.get(`movie/${movieId}?api_key=${API_KEY}`);
+    return data;
+  } catch (error) {
+    console.log(error.message);
   }
 }
