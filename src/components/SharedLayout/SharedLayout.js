@@ -7,7 +7,7 @@ function SharedLayout() {
       <Header>
         <nav>
           <NavItem to="/">Home</NavItem>
-          {/* <NavItem>Movies</NavItem> */}
+          <NavItem to="movies">Movies</NavItem>
         </nav>
       </Header>
       <Outlet />

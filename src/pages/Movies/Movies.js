@@ -1,0 +1,35 @@
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { getMoviesByName } from 'services/moviesAPI';
+import Searchbar from 'components/Searchbar/Searchbar';
+import MovieList from 'components/MovieList/MovieList';
+
+function Movies() {
+  const [requestedMovies, setRequestedMovies] = useState([]);
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const query = searchParams.get('query');
+
+    if (query) {
+      getMoviesByName(query).then(response =>
+        setRequestedMovies(response?.results ?? [])
+      );
+    }
+  }, [searchParams]);
+
+  return (
+    <div>
+      <Searchbar />
+      {requestedMovies.length > 0 ? (
+        <MovieList items={requestedMovies} />
+      ) : (
+        searchParams.get('query') && (
+          <p>There's nothing was found. Try to find something else.</p>
+        )
+      )}
+    </div>
+  );
+}
+
+export default Movies;
