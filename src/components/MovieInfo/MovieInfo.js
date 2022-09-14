@@ -30,14 +30,14 @@ function MovieInfo() {
           />
           <CreditsList>
             <CreditsItem>
-              <p>{`User score: ${movie.vote_average}%`}</p>
+              <h3>{`User score: ${movie.vote_average.toFixed(2) * 10}%`}</h3>
             </CreditsItem>
             <CreditsItem>
-              <h3>Overview</h3>
+              <h3>About:</h3>
               <p>{movie.overview}</p>
             </CreditsItem>
             <CreditsItem>
-              <h3>Genre</h3>
+              <h3>Genres:</h3>
               <p>{movie.genres.map(genre => genre.name).join(', ')}</p>
             </CreditsItem>
           </CreditsList>
