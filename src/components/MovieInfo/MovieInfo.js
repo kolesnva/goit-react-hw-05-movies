@@ -1,12 +1,5 @@
-import { useState, useEffect, Suspense, lazy } from 'react';
-import {
-  useParams,
-  Routes,
-  Route,
-  useNavigate,
-  useLocation,
-  Link,
-} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { getMovieById } from 'services/moviesAPI';
 import {
   Poster,
@@ -17,6 +10,7 @@ import {
 
 function MovieInfo() {
   const [movie, setMovie] = useState(null);
+
   const { movieId } = useParams();
 
   useEffect(() => {
