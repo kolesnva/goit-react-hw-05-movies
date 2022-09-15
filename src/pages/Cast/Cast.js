@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { getMovieCast } from 'services/moviesAPI';
 import { CastList, CastItem } from './CastStyled';
 
 function Cast() {
   const [movieCast, setMovieCast] = useState(null);
-  const { movieId } = useSearchParams();
+  const { movieId } = useParams();
 
   useEffect(() => {
     getMovieCast(movieId).then(response => setMovieCast(response?.cast));
@@ -29,5 +30,13 @@ function Cast() {
     </>
   );
 }
+
+Cast.propTypes = {
+  movieCast: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    profile_path: PropTypes.string.isRequired,
+  }),
+};
 
 export default Cast;

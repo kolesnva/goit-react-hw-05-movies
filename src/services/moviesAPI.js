@@ -31,7 +31,7 @@ export async function getMovieById(movieId) {
     const { data } = await axios.get(`movie/${movieId}?api_key=${API_KEY}`);
     return data;
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 }
 
@@ -42,7 +42,7 @@ export async function getMovieCast(movieId) {
     );
     return data;
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 }
 
@@ -53,6 +53,6 @@ export async function getMovieReviews(movieId) {
     );
     return data;
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 }
