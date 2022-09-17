@@ -1,47 +1,35 @@
 import { MovieNavigationWrap, NavItem, BackBtn } from './MovieDetailsStyled';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { useLocation, Outlet } from 'react-router-dom';
 import { useState, useEffect, Suspense, lazy } from 'react';
-import MovieInfo from 'components/MovieInfo/MovieInfo';
 
-const Cast = lazy(() => import('../../pages/Cast/Cast'));
-const Reviews = lazy(() => import('../../pages/Reviews/Reviews'));
+const MovieInfo = lazy(() => import('components/MovieInfo/MovieInfo'));
 
 function MovieDetails() {
-  const [buttonPath, setButtonPath] = useState(null);
-  const navigate = useNavigate();
   const location = useLocation();
+  const [buttonPath, setButtonPath] = useState('/');
 
   useEffect(() => {
-    if (location?.state?.from) {
-      setButtonPath(location.state.from);
-    }
-  }, [location.state.from]);
+    setButtonPath(location.state?.from ?? '/');
+  }, [location.state?.from]);
 
   return (
     <>
       <div>
-        <BackBtn
-          type="button"
-          onClick={() => {
-            navigate(buttonPath || '/');
-          }}
-        >
-          Back
-        </BackBtn>
+        <BackBtn to={buttonPath}>Back</BackBtn>
         <MovieInfo />
         <MovieNavigationWrap>
-          <NavItem to="cast">Cast</NavItem>
-          <NavItem to="reviews">Reviews</NavItem>
+          <NavItem to="cast" state={{ from: buttonPath }}>
+            Cast
+          </NavItem>
+          <NavItem to="reviews" state={{ from: buttonPath }}>
+            Reviews
+          </NavItem>
         </MovieNavigationWrap>
         <Suspense fallback={<h1>Wait...</h1>}>
-          <Routes>
-            <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Reviews />} />
-          </Routes>
+          <Outlet />
         </Suspense>
       </div>
     </>
   );
 }
-
 export default MovieDetails;

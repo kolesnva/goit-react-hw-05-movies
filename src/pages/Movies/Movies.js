@@ -7,27 +7,25 @@ import MovieList from 'components/MovieList/MovieList';
 function Movies() {
   const [requestedMovies, setRequestedMovies] = useState([]);
   const [searchParams] = useSearchParams();
+  const [noResult, setNoResult] = useState(false);
 
   useEffect(() => {
     const query = searchParams.get('query');
 
     if (query) {
-      getMoviesByName(query).then(response =>
-        setRequestedMovies(response?.results ?? [])
-      );
+      getMoviesByName(query).then(response => {
+        setRequestedMovies(response?.results ?? []);
+        setNoResult(!response?.results?.length);
+      });
     }
   }, [searchParams]);
 
   return (
     <div>
       <Searchbar />
-      {requestedMovies.length > 0 ? (
-        <MovieList items={requestedMovies} />
-      ) : (
-        searchParams.get('query') && (
-          <p>There's nothing was found. Try to find something else.</p>
-        )
-      )}
+      {requestedMovies.length > 0 && <MovieList items={requestedMovies} />}
+
+      {noResult && <p>There was nothing found. Try to find something else</p>}
     </div>
   );
 }

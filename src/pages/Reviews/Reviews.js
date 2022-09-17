@@ -4,19 +4,19 @@ import { getMovieReviews } from 'services/moviesAPI';
 import { ReviewsList, ReviewsItem } from './ReviewsStyled';
 
 function Reviews() {
-  const [movieReviews, setMovieReviews] = useState(null);
+  const [movieReviews, setMovieReviews] = useState([]);
   const { movieId } = useParams();
 
   useEffect(() => {
     getMovieReviews(movieId).then(response =>
-      setMovieReviews(response?.results)
+      setMovieReviews(response?.results ?? [])
     );
   }, [movieId]);
 
   return (
     <>
       <div>
-        {movieReviews && (
+        {movieReviews.length > 0 && (
           <ReviewsList>
             {movieReviews.map(({ id, content, author }) => (
               <ReviewsItem key={id}>
@@ -25,6 +25,10 @@ function Reviews() {
               </ReviewsItem>
             ))}
           </ReviewsList>
+        )}
+
+        {movieReviews.length === 0 ?? (
+          <p>There are no reviews for this movie yet.</p>
         )}
       </div>
     </>

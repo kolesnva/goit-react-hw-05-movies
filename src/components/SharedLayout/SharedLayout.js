@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Header, NavItem } from './SharedLayoutStyled';
+import { Suspense } from 'react';
 
 function SharedLayout() {
   return (
@@ -10,7 +11,9 @@ function SharedLayout() {
           <NavItem to="movies">Movies</NavItem>
         </nav>
       </Header>
-      <Outlet />
+      <Suspense fallback={<h1>Wait...</h1>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 }

@@ -16,7 +16,8 @@ function Searchbar() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    setSearchParams({ query: event.target.input.value });
+    const query = event.target.elements.input.value.trim();
+    query ? setSearchParams({ query }) : setSearchParams({});
   };
 
   return (
