@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import MovieList from 'components/MovieList/MovieList';
 import { getTrendingMovies } from 'services/moviesAPI';
+import { Box } from 'components/Box';
 
 function Home() {
   const [movies, setMovies] = useState([]);
@@ -10,10 +11,12 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <h1>Popular now</h1>
+    <Box as={'section'} p={3}>
+      <Box as={'h1'} textAlign="center">
+        Popular now
+      </Box>
       <MovieList items={movies} />
-    </div>
+    </Box>
   );
 }
 
