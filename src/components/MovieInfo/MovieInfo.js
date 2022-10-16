@@ -6,6 +6,7 @@ import {
   MovieTitle,
   CreditsList,
   CreditsItem,
+  Container,
 } from './MovieInfoStyled';
 
 function MovieInfo() {
@@ -20,29 +21,35 @@ function MovieInfo() {
   return (
     <>
       {movie && (
-        <div>
-          <MovieTitle>{`${movie.title} (${movie.release_date.slice(
-            0,
-            4
-          )})`}</MovieTitle>
-          <Poster
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-          />
+        <Container>
+          <div style={{ textAlign: 'center' }}>
+            <MovieTitle>{`${movie.title} (${movie.release_date.slice(
+              0,
+              4
+            )})`}</MovieTitle>
+            <Poster
+              src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
+              alt={movie.title}
+            />
+          </div>
           <CreditsList>
             <CreditsItem>
-              <h3>{`User score: ${movie.vote_average.toFixed(2) * 10}%`}</h3>
+              <h3 style={{ textAlign: 'center' }}>About:</h3>
+              <p style={{ textAlign: 'center' }}>{movie.overview}</p>
             </CreditsItem>
             <CreditsItem>
-              <h3>About:</h3>
-              <p>{movie.overview}</p>
+              <h3 style={{ textAlign: 'center' }}>{`User score: ${
+                movie.vote_average.toFixed(2) * 10
+              }%`}</h3>
             </CreditsItem>
             <CreditsItem>
-              <h3>Genres:</h3>
-              <p>{movie.genres.map(genre => genre.name).join(', ')}</p>
+              <h3 style={{ textAlign: 'center' }}>Genres:</h3>
+              <p style={{ textAlign: 'center' }}>
+                {movie.genres.map(genre => genre.name).join(', ')}
+              </p>
             </CreditsItem>
           </CreditsList>
-        </div>
+        </Container>
       )}
     </>
   );

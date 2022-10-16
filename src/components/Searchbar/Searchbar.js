@@ -1,6 +1,7 @@
-import { Header, Form, Input, SubmitBtn } from './SearchbarStyled';
+import { Container, Form, Input, SubmitBtn } from './SearchbarStyled';
 import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { BiSearchAlt2 } from 'react-icons/bi';
 
 function Searchbar() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -21,7 +22,7 @@ function Searchbar() {
   };
 
   return (
-    <Header>
+    <Container>
       <Form onSubmit={handleSubmit}>
         <Input
           name="input"
@@ -29,10 +30,13 @@ function Searchbar() {
           autocomplete="off"
           autoFocus
           ref={input}
+          placeholder="Enter movie name"
         />
-        <SubmitBtn type="submit">Search</SubmitBtn>
+        <SubmitBtn type="submit">
+          <BiSearchAlt2 size={24} />
+        </SubmitBtn>
       </Form>
-    </Header>
+    </Container>
   );
 }
 

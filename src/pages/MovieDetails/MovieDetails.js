@@ -1,6 +1,7 @@
 import { MovieNavigationWrap, NavItem, BackBtn } from './MovieDetailsStyled';
 import { useLocation, Outlet } from 'react-router-dom';
 import { useState, useEffect, Suspense, lazy } from 'react';
+import { Footer } from 'components/Footer/Footer';
 
 const MovieInfo = lazy(() => import('components/MovieInfo/MovieInfo'));
 
@@ -28,6 +29,7 @@ function MovieDetails() {
         <Suspense fallback={<h1>Wait...</h1>}>
           <Outlet />
         </Suspense>
+        <Footer />
       </div>
     </>
   );

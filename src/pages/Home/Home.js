@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import MovieList from 'components/MovieList/MovieList';
 import { getTrendingMovies } from 'services/moviesAPI';
-import { Box } from 'components/Box';
+import { SectionWrap, Title } from './HomeStyled';
+import { Footer } from 'components/Footer/Footer';
 
 function Home() {
   const [movies, setMovies] = useState([]);
@@ -11,12 +12,11 @@ function Home() {
   }, []);
 
   return (
-    <Box as={'section'} p={3}>
-      <Box as={'h1'} textAlign="center">
-        Popular now
-      </Box>
+    <SectionWrap>
+      <Title>Popular now</Title>
       <MovieList items={movies} />
-    </Box>
+      <Footer />
+    </SectionWrap>
   );
 }
 
