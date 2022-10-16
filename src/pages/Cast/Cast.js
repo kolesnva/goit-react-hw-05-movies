@@ -19,7 +19,7 @@ function Cast() {
           {movieCast.map(({ id, name, profile_path }) => (
             <CastItem key={id}>
               <img
-                src={`https://image.tmdb.org/t/p/w300${profile_path}`}
+                src={`https://image.tmdb.org/t/p/w200${profile_path}`}
                 alt={name}
               />
               <p>{name}</p>
